@@ -8,13 +8,14 @@ using namespace std;
 int main() {
 
     struct TMhs {
-        char nim[9];
+        char nim[8];
         char nama[30];
         short uts, uas;
         float nilai_akhir;        
     };
+    
     TMhs mhs;
-    cout<<"NIM  : ";cin.getline(mhs.nim, sizeof(mhs.nim));
+    cout<<"NIM  : ";cin.getline(mhs.nim, sizeof(mhs.nim)+1);
     cout<<"Nama : ";cin.getline(mhs.nama, sizeof(mhs.nama));
     cout<<"UTS  : ";cin>>mhs.uts;
     cout<<"UAS  : ";cin>>mhs.uas;
