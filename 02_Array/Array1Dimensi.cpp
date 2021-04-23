@@ -63,4 +63,5 @@ int main() {
     cout<<"Banyak Data  : "<<BanyakData<<endl;
     TampilData(Data, BanyakData); //memanggil procedure tampil data
 
+    return 0;
 }
