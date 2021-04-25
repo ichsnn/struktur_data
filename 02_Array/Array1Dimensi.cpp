@@ -38,16 +38,19 @@ int Inisialisasi(int D[Maks], int N) {
     return BanyakData = 0;    
 }
 
-//Procedure Tambah di Akhir
+
 //Penambahan Data (Add)
-int TambahDiAkhir(int DataBaru, int D[Maks], int N) {
-    if(N < Maks) {
-        D[N+1] = DataBaru;
-        N += 1;
-    } else cout<<"Data Telah Penuh";
-    BanyakData = N;
-    return BanyakData;
+
+//Procedure Tambah di Akhir
+void TambahDiAkhir(int DataBaru, int D[Maks], int BanyakData) {
+    if(BanyakData < Maks) {
+        D[BanyakData+1] = DataBaru;
+        BanyakData += 1;
+    } else cout<<"Data Telah Penuh\n";        
 }
+
+//Procedure Tambah di Tengah
+
 
 //Program Utama
 int main() {
@@ -59,8 +62,10 @@ int main() {
     Data[4] = 12;
     Data[5] = 9;    
     //Inisialisasi(Data, BanyakData);
-    TambahDiAkhir(5, Data, BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;
+    TambahDiAkhir(5, Data, BanyakData);
+    TampilData(Data, BanyakData); //memanggil procedure tampil data    
+    TambahDiAkhir(7, Data, BanyakData);
     TampilData(Data, BanyakData); //memanggil procedure tampil data
 
     return 0;
