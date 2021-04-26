@@ -29,20 +29,20 @@ void TampilData(int D[Maks], int N) {
 
 //Procedure Inisialisasi
 //Inisialiasi Array (Initialize)
-int Inisialisasi(int D[Maks], int N) {
+void Inisialisasi(int *D, int *N) {
     int i;
 
-    for(i = 1; i <= N; i++) {
+    for(i = 1; i <= (*N); i++) {
         D[i] = 0;
-    }
-    return BanyakData = 0;    
+    }    
+    N = 0;
 }
 
 
 //Penambahan Data (Add)
 
 //Procedure Tambah di Akhir
-void TambahDiAkhir(int DataBaru, int D[Maks], int BanyakData) {
+void TambahDiAkhir(int DataBaru, int *D, int N) {
     if(BanyakData < Maks) {
         D[BanyakData+1] = DataBaru;
         BanyakData += 1;
@@ -61,12 +61,20 @@ int main() {
     Data[3] = 7;
     Data[4] = 12;
     Data[5] = 9;    
-    //Inisialisasi(Data, BanyakData);
-    cout<<"Banyak Data  : "<<BanyakData<<endl;
-    TambahDiAkhir(5, Data, BanyakData);
-    TampilData(Data, BanyakData); //memanggil procedure tampil data    
-    TambahDiAkhir(7, Data, BanyakData);
-    TampilData(Data, BanyakData); //memanggil procedure tampil data
+    Inisialisasi(Data, &BanyakData);
+    cout<<"Banyak Data  : "<<BanyakData<<endl;      
+    TampilData(Data, BanyakData); //memanggil procedure tampil data            
+    BanyakData = 5;
+    Data[1] = 10;
+    Data[2] = 5;
+    Data[3] = 7;
+    Data[4] = 12;
+    Data[5] = 9;     
+    cout<<"Banyak Data  : "<<BanyakData<<endl;      
+    TampilData(Data, BanyakData); //memanggil procedure tampil data            
+    TambahDiAkhir(12, Data, BanyakData);
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data            
 
     return 0;
 }
