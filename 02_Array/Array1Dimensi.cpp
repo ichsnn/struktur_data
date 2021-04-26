@@ -3,14 +3,14 @@
 using namespace std;
 
 //Deklarasi (GLOBAL)
-const int Maks = 100;
+const int Maks = 6; //Maks Data[5]
 
     int Data[Maks];
     int BanyakData;       //masukan untuk panjang array
 
 //Procedure tampil data 
 //Penelusuran Array (Traversal)
-void TampilData(int D[Maks], int N) {
+void TampilData(int *D, int N) {
     int i;
 
     cout<<"Data : ";
@@ -42,15 +42,19 @@ void Inisialisasi(int *D, int *N) {
 //Penambahan Data (Add)
 
 //Procedure Tambah di Akhir
-void TambahDiAkhir(int DataBaru, int *D, int N) {
-    if(BanyakData < Maks) {
-        D[BanyakData+1] = DataBaru;
-        BanyakData += 1;
-    } else cout<<"Data Telah Penuh\n";        
+void TambahDiAkhir(int DataBaru, int *D, int *N) {
+    if(*N<Maks-1) {
+        D[*N+1] = DataBaru;        
+        *N += 1;
+    } else cout<<"Data Telah Penuh!\n";
 }
 
 //Procedure Tambah di Tengah
+void TambahDiTengah(int DataBaru, int *D, int *N) {
+    if(*N<Maks-1) {
 
+    } else cout<<"Data Telah Penuh\n";
+}
 
 //Program Utama
 int main() {
@@ -59,8 +63,8 @@ int main() {
     Data[1] = 10;
     Data[2] = 5;
     Data[3] = 7;
-    Data[4] = 12;
-    Data[5] = 9;    
+    Data[4] = 12; 
+    Data[5] = 0;      
     Inisialisasi(Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data            
@@ -68,13 +72,13 @@ int main() {
     Data[1] = 10;
     Data[2] = 5;
     Data[3] = 7;
-    Data[4] = 12;
-    Data[5] = 9;     
+    Data[4] = 12;       
+    Data[5] = 0;
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data            
-    TambahDiAkhir(12, Data, BanyakData);
+    TambahDiAkhir(10, Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
-    TampilData(Data, BanyakData); //memanggil procedure tampil data            
+    TampilData(Data, BanyakData); //memanggil procedure tampil data      
 
     return 0;
 }
