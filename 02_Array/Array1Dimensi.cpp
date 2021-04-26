@@ -50,9 +50,14 @@ void TambahDiAkhir(int DataBaru, int *D, int *N) {
 }
 
 //Procedure Tambah di Tengah
-void TambahDiTengah(int DataBaru, int *D, int *N) {
+void TambahDiTengah(int DataBaru, int PosisiSisip, int *D, int *N) {
+    int i;
     if(*N<Maks-1) {
-
+        if(PosisiSisip>=1 && PosisiSisip<=*N) {
+            for(i=*N; i>0; i--) D[i+1] = D[i];      //Penggeser Data            
+            D[PosisiSisip] = DataBaru;              //Sisiip Data Baru
+            *N += 1;
+        } else cout<<"Posisi sisip tidak sah!\n";
     } else cout<<"Data Telah Penuh\n";
 }
 
@@ -72,11 +77,11 @@ int main() {
     Data[1] = 10;
     Data[2] = 5;
     Data[3] = 7;
-    Data[4] = 12;       
-    Data[5] = 0;
+    Data[4] = 12; 
+    Data[5] = 1;
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data            
-    TambahDiAkhir(10, Data, &BanyakData);
+    TambahDiTengah(8, 2, Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data      
 
