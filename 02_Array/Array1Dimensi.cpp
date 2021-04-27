@@ -3,7 +3,7 @@
 using namespace std;
 
 //Deklarasi (GLOBAL)
-const int Maks = 6; //Maks Data[5]
+const int Maks = 100; //Maks Data[5]
 
     int Data[Maks];
     int BanyakData;       //masukan untuk panjang array
@@ -54,7 +54,7 @@ void TambahDiTengah(int DataBaru, int PosisiSisip, int *D, int *N) {
     int i;
     if(*N<Maks-1) {
         if(PosisiSisip>=1 && PosisiSisip<=*N) {
-            for(i=*N; i>0; i--) D[i+1] = D[i];      //Penggeser Data            
+            for(i=*N; i>=PosisiSisip; i--) D[i+1] = D[i];      //Penggeser Data            
             D[PosisiSisip] = DataBaru;              //Sisiip Data Baru
             *N += 1;
         } else cout<<"Posisi sisip tidak sah!\n";
@@ -78,10 +78,10 @@ int main() {
     Data[2] = 5;
     Data[3] = 7;
     Data[4] = 12; 
-    Data[5] = 1;
+    Data[5] = 9;
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data            
-    TambahDiTengah(8, 2, Data, &BanyakData);
+    TambahDiTengah(8, 6, Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data      
 
