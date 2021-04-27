@@ -35,7 +35,7 @@ void Inisialisasi(int *D, int *N) {
     for(i = 1; i <= (*N); i++) {
         D[i] = 0;
     }    
-    N = 0;
+    *N = 0;
 }
 
 
@@ -95,6 +95,11 @@ void HapusDiAwal(int *D, int *N) {      //Hapus Data di Awal
     HapusDiTengah(1, D, N);    
 }
 
+//DESTROY ARRAY
+void HancurkanArray(int *D, int *N) {
+    Inisialisasi(D, N);
+}
+
 
 //Program Utama
 int main() {
@@ -152,7 +157,7 @@ int main() {
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data 
 
-    cout<<"\nHapus Data di Tengah"<<endl;
+    cout<<"\nHapus Data di Tengah (3)"<<endl;
     HapusDiTengah(3 ,Data, &BanyakData);            //Di Akhir
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data     
@@ -161,6 +166,11 @@ int main() {
     HapusDiAwal(Data, &BanyakData);            //Di Akhir
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data     
+
+    cout<<"\nHancurkan Array"<<endl;
+    HancurkanArray(Data, &BanyakData);            //Di Akhir
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data 
 
     return 0;    
 }
