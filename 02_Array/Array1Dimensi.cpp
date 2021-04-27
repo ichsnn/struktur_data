@@ -39,7 +39,7 @@ void Inisialisasi(int *D, int *N) {
 }
 
 
-//Penambahan Data (Add)
+//PENAMBAHAN DATA (ADD)
 
 //Procedure Tambah di Akhir
 void TambahDiAkhir(int DataBaru, int *D, int *N) {
@@ -61,6 +61,20 @@ void TambahDiTengah(int DataBaru, int PosisiSisip, int *D, int *N) {
     } else cout<<"Data Telah Penuh\n";
 }
 
+//Procedure Tambah di Awal
+void TambahDiAwal(int DataBaru, int *D, int *N) {
+    TambahDiTengah(DataBaru, 1, D, N);
+}
+
+//PENGEDITAN ARRAY
+void UpdateData(int DataBaru, int PosisiUpdate, int *D, int *N) {
+    if(PosisiUpdate>=1 && PosisiUpdate<=*N) {
+        D[PosisiUpdate] = DataBaru;
+    } else cout<<"Posisi update tidak sah!\n";
+}
+
+
+
 //Program Utama
 int main() {
 
@@ -70,20 +84,41 @@ int main() {
     Data[3] = 7;
     Data[4] = 12; 
     Data[5] = 0;      
+
+    //Inisialiasi Data
     Inisialisasi(Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data            
+
+    //DataBaru
     BanyakData = 5;
     Data[1] = 10;
     Data[2] = 5;
     Data[3] = 7;
     Data[4] = 12; 
     Data[5] = 9;
-    cout<<"Banyak Data  : "<<BanyakData<<endl;      
-    TampilData(Data, BanyakData); //memanggil procedure tampil data            
-    TambahDiTengah(8, 6, Data, &BanyakData);
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data 
+
+    //TambahData
+
+    TambahDiAkhir(20, Data, &BanyakData);       //Di Akhir
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data    
+
+    TambahDiTengah(8, 3, Data, &BanyakData);    //Di Tengah
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data      
+
+    TambahDiAwal(5, Data, &BanyakData);         //Di Awal
+    cout<<"Banyak Data  : "<<BanyakData<<endl;      
+    TampilData(Data, BanyakData); //memanggil procedure tampil data  
+
+    //UPDATE
+    UpdateData(30, 2, Data, &BanyakData);
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data  
+
 
     return 0;
 }
