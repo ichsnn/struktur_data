@@ -73,6 +73,14 @@ void UpdateData(int DataBaru, int PosisiUpdate, int *D, int *N) {
     } else cout<<"Posisi update tidak sah!\n";
 }
 
+//DELETE DATA
+void HapusDiAkhir(int *D, int *N) {     //Hapus Data di Akhir
+    if(N>0) {
+        D[*N] = 0;
+        *N = *N - 1;
+    } else cout<<"Data Kosong\n";
+}
+
 
 
 //Program Utama
@@ -123,6 +131,13 @@ int main() {
     UpdateData(30, 2, Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data  
+
+    //DELETE
+
+    cout<<"\nHapus Data di Akhir"<<endl;
+    HapusDiAkhir(Data, &BanyakData);            //Di Akhir
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data 
 
     return 0;
 }
