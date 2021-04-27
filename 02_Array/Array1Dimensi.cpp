@@ -3,7 +3,7 @@
 using namespace std;
 
 //Deklarasi (GLOBAL)
-const int Maks = 100; //Maks Data[5]
+const int Maks = 100; //Maks Data[5]    
 
     int Data[Maks];
     int BanyakData;       //masukan untuk panjang array
@@ -81,6 +81,19 @@ void HapusDiAkhir(int *D, int *N) {     //Hapus Data di Akhir
     } else cout<<"Data Kosong\n";
 }
 
+void HapusDiTengah(int PosisiHapus, int *D, int *N) {   //Hapus Data di Tengah 
+    if(N>0) {
+        if(PosisiHapus>=1 && PosisiHapus<=*N) {
+            for(int i=PosisiHapus+1; i<=*N ; i++) D[i-1] = D[i];
+            D[*N] = 0;
+            *N -= 1;
+        } else cout<<"Posisi hapus tidak sah\n";
+    } else cout<<"Data Kosong\n";
+}
+
+void HapusDiAwal(int *D, int *N) {      //Hapus Data di Awal    
+    HapusDiTengah(1, D, N);    
+}
 
 
 //Program Utama
@@ -108,10 +121,10 @@ int main() {
     Data[5] = 9;
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data     
-
+    
     //TambahData
 
-    cout<<"\nPenambahan Data di Akhir"<<endl;
+    cout<<"Penambahan Data di Akhir"<<endl;
     TambahDiAkhir(20, Data, &BanyakData);       //Di Akhir
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data    
@@ -125,7 +138,7 @@ int main() {
     TambahDiAwal(5, Data, &BanyakData);         //Di Awal
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data  
-
+    
     //UPDATE
     cout<<"\nUpdate Data (30, 2)"<<endl;
     UpdateData(30, 2, Data, &BanyakData);
@@ -139,5 +152,15 @@ int main() {
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data 
 
-    return 0;
+    cout<<"\nHapus Data di Tengah"<<endl;
+    HapusDiTengah(3 ,Data, &BanyakData);            //Di Akhir
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data     
+
+    cout<<"\nHapus Data di Awal"<<endl;
+    HapusDiAwal(Data, &BanyakData);            //Di Akhir
+    cout<<"Banyak Data  : "<<BanyakData<<endl;          
+    TampilData(Data, BanyakData); //memanggil procedure tampil data     
+
+    return 0;    
 }
