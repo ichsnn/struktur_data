@@ -101,19 +101,33 @@ void HancurkanArray(int *D, int *N) {
 }
 
 //PENCARIAN
-int Pencarian(int *D, int N, int Dicari) {
-    int Pencarian;
+int Pencarian(int *D, int N, int Dicari) {   
+    int hasil; 
     int i = 0;
     while(D[i]!=Dicari && i<N) {
         i++;
         if(D[i]==Dicari) {
-            Pencarian = i;    
-        } else Pencarian = 0;        
-    }
-    return Pencarian;
+            hasil = i;   
+        } else hasil = 0;
+    }    
+    return hasil;
 }
 
-//Program Utama
+void SelectionSort(int *D, int N){
+    int i, imin, temp, j;
+    for(i=1; i<N; i++) {
+        imin = i;
+        for(j=i+1;j<=N;j++) {
+            if(D[j]<D[imin])
+              imin = j;
+        }
+        temp = D[i];
+        D[i] = D[imin];
+        D[imin] = temp;
+    }
+}
+
+//PROGRAM UTAMA
 int main() {
 
     BanyakData = 5;
@@ -186,12 +200,19 @@ int main() {
     TampilData(Data, BanyakData); //memanggil procedure tampil data 
     */
 
+   /*
+    //PENCARIAN    
     int Dicari;
     cout<<"\nData yang dicari : ";cin>>Dicari;
-    int PosisiData = Pencarian(Data, BanyakData, Dicari);
+    int PosisiData = Pencarian(Data, BanyakData, Dicari);           //Metode sekuensial
     if(PosisiData!=0) {
         cout<<"Data ditemukan di posisi ke-"<<PosisiData<<"\n";
     } else cout<<"Data tidak ditemukan\n";
+    */
 
+    SelectionSort(Data, BanyakData);  
+    cout<<"\nData setelah di urut"<<endl;
+    TampilData(Data, BanyakData);
+    
     return 0;    
 }
