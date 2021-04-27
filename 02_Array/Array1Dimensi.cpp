@@ -91,6 +91,7 @@ int main() {
     TampilData(Data, BanyakData); //memanggil procedure tampil data            
 
     //DataBaru
+    cout<<"\nData Baru"<<endl;
     BanyakData = 5;
     Data[1] = 10;
     Data[2] = 5;
@@ -98,27 +99,30 @@ int main() {
     Data[4] = 12; 
     Data[5] = 9;
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
-    TampilData(Data, BanyakData); //memanggil procedure tampil data 
+    TampilData(Data, BanyakData); //memanggil procedure tampil data     
 
     //TambahData
 
+    cout<<"\nPenambahan Data di Akhir"<<endl;
     TambahDiAkhir(20, Data, &BanyakData);       //Di Akhir
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data    
 
+    cout<<"\nPenambahan Data di Tengah (8, 3)"<<endl;
     TambahDiTengah(8, 3, Data, &BanyakData);    //Di Tengah
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data      
 
+    cout<<"\nPenambahan Data di Awal"<<endl;
     TambahDiAwal(5, Data, &BanyakData);         //Di Awal
     cout<<"Banyak Data  : "<<BanyakData<<endl;      
     TampilData(Data, BanyakData); //memanggil procedure tampil data  
 
     //UPDATE
+    cout<<"\nUpdate Data (30, 2)"<<endl;
     UpdateData(30, 2, Data, &BanyakData);
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data  
-
 
     return 0;
 }
