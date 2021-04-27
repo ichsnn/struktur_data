@@ -100,6 +100,18 @@ void HancurkanArray(int *D, int *N) {
     Inisialisasi(D, N);
 }
 
+//PENCARIAN
+int Pencarian(int *D, int N, int Dicari) {
+    int Pencarian;
+    int i = 0;
+    while(D[i]!=Dicari && i<N) {
+        i++;
+        if(D[i]==Dicari) {
+            Pencarian = i;    
+        } else Pencarian = 0;        
+    }
+    return Pencarian;
+}
 
 //Program Utama
 int main() {
@@ -167,10 +179,19 @@ int main() {
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data     
 
+    /*
     cout<<"\nHancurkan Array"<<endl;
     HancurkanArray(Data, &BanyakData);            //Di Akhir
     cout<<"Banyak Data  : "<<BanyakData<<endl;          
     TampilData(Data, BanyakData); //memanggil procedure tampil data 
+    */
+
+    int Dicari;
+    cout<<"\nData yang dicari : ";cin>>Dicari;
+    int PosisiData = Pencarian(Data, BanyakData, Dicari);
+    if(PosisiData!=0) {
+        cout<<"Data ditemukan di posisi ke-"<<PosisiData<<"\n";
+    } else cout<<"Data tidak ditemukan\n";
 
     return 0;    
 }
