@@ -12,10 +12,13 @@ typedef int LarikInt[NMAKS + 1];
 void bacaData(LarikInt &data1, int N);                              // 1. Baca Data
 float total(LarikInt data1, int N);                                 // 2. Tampilkan Total Penjumlahan Semua Elemen
 float rerata(LarikInt data1, int N);                                // 3. Tampilkan Rata-Rata
-int frekuensi(LarikInt data1, int N, int x);                        // Pencari frekuensi
+int frekuensi(LarikInt data1, int N, int x);                        // Pencari frekuensi tunggal
 void terkecil(LarikInt data1, int N, int &min1, int &fmin1);        // 4. Tampilkan Nilai Terkecil dan Banyaknya    
 void terbesar(LarikInt data1, int N, int &max1, int &fmax1);        // 5. Tampilkan Nilai Terbesar dan Banyaknya
-float variansi(LarikInt data1, int N, float rata);                          // 6. Tampilkan Variansi Nilainya
+float variansi(LarikInt data1, int N, float rata);                  // 6. Tampilkan Variansi Nilainya
+float simpangan(float s1);                                          // 7. Tampilkan Simpangan Baku
+void urutkan(LarikInt &data1, int N);                               // Mengurutkan dari kecil ke besar
+void frekuensiGroup(LarikInt data1, int N);                         // 8. Tampilkan Frekuensi Tiap Data
                                       
 //PROGRAM UTAMA
 int main(int argc, char const *argv[]) {
@@ -27,7 +30,8 @@ int main(int argc, char const *argv[]) {
     float u;            //rata - rata
     int min, fmin;      //nilai terkecil dan banyaknya
     int max, fmax;      //nilai terbesar dan banyaknya
-    float s;          //variansi
+    float s;            //variansi
+    float sx;           //simpangan baku
 
 
     //PROGRAM UTAMA    
@@ -42,13 +46,18 @@ int main(int argc, char const *argv[]) {
     terkecil(data, banyakData, min, fmin);    
     terbesar(data, banyakData, max, fmax);
     s = variansi(data, banyakData, u);
+    sx = simpangan(s);
 
     cout<<"Total            : "<<sum<<endl;                         //2. Tampilkan Total Penjumlahan Semua Elemen
     cout<<"Rata - Rata      : "<<u<<endl;                           //3. Tampilkan Rata-Rata
     cout<<"Terkecil         : "<<min<<" sebanyak "<<fmin<<endl;     //4. Tampilkan Nilai Terkecil dan Banyaknya
     cout<<"Terbesar         : "<<max<<" sebanyak "<<fmax<<endl;     //5. Tampilkan Nilai Terbesar dan Banyaknya
-    cout<<"Variansi         : "<<setprecision(4)<<s<<endl;                         //6. Tampilkan Variansi
-
+    cout<<"Variansi         : "<<setprecision(2)<<fixed<<s<<endl;                         //6. Tampilkan Variansi
+    cout<<"Simpangan        : "<<sx<<endl;   
+    cout<<"Frekuensi        : "<<endl;
+    urutkan(data, banyakData);    
+    frekuensiGroup(data, banyakData);
+        
     return 0;
 }
 
@@ -137,3 +146,56 @@ float variansi(LarikInt data1, int N, float rata) {
     }
     return e/(N-1);
 }                          
+float simpangan(float s1) {
+//7. Tampilkan Simpangan Baku    
+    //DEKLARASI
+        //tidak ada
+    //ALGORITMA
+    return sqrt(s1);
+}        
+void urutkan(LarikInt &data1, int N) {
+//Mengurutkan dari kecil ke besar    
+    //DEKLARASI
+    int i, j;
+    int imin;
+    int temp;
+    //ALGORITMA
+    for(i=1;i<N;i++) {
+        imin = i;
+        for(j=i+1;j<=N;j++) {
+            if(data1[j] < data1[imin]) {
+                imin = j;
+            }
+            temp = data1[i];
+            data1[i] = data1[imin];
+            data1[imin] = temp;
+        }
+    }
+}                               
+void frekuensiGroup(LarikInt data1, int N) {
+//8. Tampilkan Frekuensi Tiap Data
+    //DEKLARASI
+    int i, j;
+    int visited;
+    int count; 
+    LarikInt f;   
+    //ALGORITMA
+    visited = -1;
+    for(i=1;i<=N;i++) {
+        count = 1;
+        for(j=i+1;j<=N;j++) {
+            if(data1[i] == data1[j]) {
+                count++;
+                f[j] = visited;
+            }
+        }
+        if(f[i] != visited) {
+            f[i] = count;
+        }
+    }
+    for(i=1;i<=N;i++) {
+        if(f[i] != visited) {
+            cout<<"                   "<<data1[i]<<" sebanyak "<<f[i]<<endl;
+        }
+    }
+}    
