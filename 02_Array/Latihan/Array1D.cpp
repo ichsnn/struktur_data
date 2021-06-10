@@ -10,7 +10,7 @@ typedef int LarikInt[NMAKS + 1];
 void bacaData(LarikInt &data1, int N);                              // 1. Baca Data
 float total(LarikInt data1, int N);                                 // 2. Tampilkan Total Penjumlahan Semua Elemen
 float rerata(LarikInt data1, int N);                                // 3. Tampilkan Rata-Rata
-int frekuensi(LarikInt data1, int N);                               // Pencari frekuensi
+int frekuensi(LarikInt data1, int N, int x);                     // Pencari frekuensi
 void terkecil(LarikInt data1, int N, int &min1, int &fmin1);        // 4. Tampilkan Nilai Terkecil dan Banyaknya    
 void terbesar(LarikInt data1, int N, int &max1, int &fmax1);        // 5. Tampilkan Nilai Terbesar dan Banyaknya
                                       
@@ -78,19 +78,20 @@ float rerata(LarikInt data1, int N) {
     //ALGORITMA
     return total(data1, N)/N;    
 }         
-int frekuensi(LarikInt data1, int N, int a, int fa) {
+int frekuensi(LarikInt data1, int N, int x) {
 //Pencari Frekuensi
     //DEKLARASI
     int i;
-    LarikInt countData1;    
+    int count;
     //ALGORITMA
-    for(i=1;i<=fa;i++) {
-        countData1[i] = 0;
-    }
+    count = 0;
     for(i=1;i<=N;i++) {
-        countData1[data1[i]] = countData1[data1[i]] + 1;
-    }    
-    return countData1[a];
+        if(data1[i] == x) {
+            count++;
+        }
+    }
+    return count;
+    
 }
 void terkecil(LarikInt data1, int N, int &min1, int &fmin1) {
 //4. Tampilkan Nilai Terkecil dan Banyaknya
@@ -103,7 +104,7 @@ void terkecil(LarikInt data1, int N, int &min1, int &fmin1) {
             min1 = data1[i];
         }
     }
-    fmin1 = frekuensi(data1, N, min1, NMAKS);    
+    fmin1 = frekuensi(data1, N, min1);    
 }        
 void terbesar(LarikInt data1, int N, int &max1, int &fmax1) {
 //5. Tampilkan Nilai Terbesar dan Banyaknya    
@@ -116,5 +117,5 @@ void terbesar(LarikInt data1, int N, int &max1, int &fmax1) {
             max1 = data1[i];
         }
     }
-    fmax1 = frekuensi(data1, N, max1, NMAKS);    
+    fmax1 = frekuensi(data1, N, max1);    
 }        
