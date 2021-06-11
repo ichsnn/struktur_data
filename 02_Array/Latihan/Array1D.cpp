@@ -19,6 +19,7 @@ float variansi(LarikInt data1, int N, float rata);                  // 6. Tampil
 float simpangan(float s1);                                          // 7. Tampilkan Simpangan Baku
 void urutkan(LarikInt &data1, int N);                               // Mengurutkan dari kecil ke besar
 void frekuensiGroup(LarikInt data1, int N);                         // 8. Tampilkan Frekuensi Tiap Data
+int modus(LarikInt data1, int N);                                   // 9. Tampilkan Modus
                                       
 //PROGRAM UTAMA
 int main(int argc, char const *argv[]) {
@@ -32,6 +33,7 @@ int main(int argc, char const *argv[]) {
     int max, fmax;      //nilai terbesar dan banyaknya
     float s;            //variansi
     float sx;           //simpangan baku
+    int mo;             //modus
 
 
     //PROGRAM UTAMA    
@@ -47,16 +49,18 @@ int main(int argc, char const *argv[]) {
     terbesar(data, banyakData, max, fmax);
     s = variansi(data, banyakData, u);
     sx = simpangan(s);
+    mo = modus(data, banyakData);
 
     cout<<"Total            : "<<sum<<endl;                         //2. Tampilkan Total Penjumlahan Semua Elemen
     cout<<"Rata - Rata      : "<<u<<endl;                           //3. Tampilkan Rata-Rata
     cout<<"Terkecil         : "<<min<<" sebanyak "<<fmin<<endl;     //4. Tampilkan Nilai Terkecil dan Banyaknya
     cout<<"Terbesar         : "<<max<<" sebanyak "<<fmax<<endl;     //5. Tampilkan Nilai Terbesar dan Banyaknya
-    cout<<"Variansi         : "<<setprecision(2)<<fixed<<s<<endl;                         //6. Tampilkan Variansi
-    cout<<"Simpangan        : "<<sx<<endl;   
-    cout<<"Frekuensi        : "<<endl;
+    cout<<"Variansi         : "<<setprecision(2)<<fixed<<s<<endl;   //6. Tampilkan Variansi
+    cout<<"Simpangan        : "<<sx<<endl;                          //7. Tampilkan Simpangan Baku
+    cout<<"Frekuensi        : "<<endl;                              //8. Tampilkan Frekuensi Tiap Datanya
     urutkan(data, banyakData);    
     frekuensiGroup(data, banyakData);
+    cout<<"Modus            : "<<mo<<endl;                          //9. Tampilkan Modus
         
     return 0;
 }
@@ -199,3 +203,34 @@ void frekuensiGroup(LarikInt data1, int N) {
         }
     }
 }    
+int modus(LarikInt data1, int N) {
+//9. Tampilkan Modus        
+    //DEKLARASI
+    int i, j;        
+    int kandidatMo, frekKandidatMo, frekMo;
+    //ALGORITMA
+    frekMo = 0;
+    for(i=1;i<=N;i++) {
+        frekKandidatMo = 1;
+        for(j=i+1;j<=N;j++) {
+            if(data1[i] == data1[j]) {
+                frekKandidatMo++;
+            }
+        }
+        if(frekKandidatMo >= frekMo) {
+            frekMo = frekKandidatMo;
+        }
+    }
+    for(i=1;i<=N;i++) {
+        frekKandidatMo = 1;
+        for(j=i+1;j<=N;j++) {
+            if(data1[i] == data1[j]) {
+                frekKandidatMo++;
+            }
+        }
+        if(frekKandidatMo == frekMo) {
+            kandidatMo = data1[i];
+        }
+    }    
+    return kandidatMo;   
+}                                   
