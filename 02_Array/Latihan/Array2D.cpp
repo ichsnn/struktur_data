@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -82,7 +83,7 @@ void mahasiswa(tabel &tbl, int n) {
                 fflush(stdin);
                 cout<<"Nama Mahasiswa "<<i<<"\t: ";getline(cin, tbl[i][j].nama);
             }
-        }
+        }        
     }
 }
 void nilai(tabel &tbl, int b, int k) {
@@ -96,6 +97,7 @@ void nilai(tabel &tbl, int b, int k) {
             if(tbl[1][j].nama_matkul.size()<=8) cout<<"\t";
             cout<<": ";cin>>tbl[i][j].nilai;            
         }
+        cout<<endl;
     }
 }
 void gambar(tabel tbl, int b, int k) {
@@ -150,7 +152,9 @@ void gambar(tabel tbl, int b, int k) {
                 }                       
                 cout<<tbl[i][j].nilai<<"\t"; 
                 if(tbl[1][j].nama_matkul.size()>5) cout<<"\t";
-            } else cout<<tbl[i][j].ip;
+            } else {
+                cout<<fixed<<setprecision(2)<<tbl[i][j].ip;
+            }
         }        
         cout<<endl;               
     }
