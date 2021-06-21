@@ -4,41 +4,51 @@ using namespace std;
 
 struct Node {
     int info;
-    struct Node *next;
+    struct Node* next;
 };
 
-//inisialisasi
-void inisialisasi(Node* &list) {
-    list = NULL;
+//DEKLARASI GLOBAL
+Node* list;
+
+
+//PURWARUPA FUNGSI ATAU PROSEDURE YANG AKAN DIGUNAKAN
+void inisialisasi(Node* list1) {
+//inisialisasi linked list
+    list1 = NULL;
 }
-Node* createNode(int info) {
+
+void createNode(int data) {
+//membuat node baru    
     //DEKLARASI
-    Node* newNode = (Node*)malloc(sizeof(Node*));
-    newNode->info = info;
-    newNode->next = NULL;
-    return newNode;    
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->info = data;
+    newNode->next = list;
+    list = newNode;
+}
+
+void display() {
+    Node* temp = list;
+    cout<<"List is : ";
+    while(temp!=NULL) {
+        cout<<temp->info<<" ";
+        temp = temp->next;
+    }
+    cout<<endl;
 }
 
 //PROGRAM UTAMA
 int main(int argc, char const *argv[]) {
-    //DEKLARASI    
-    Node* list1;    
-    Node *a, *b, *c;
-
+    //DEKLARASI LOKAL
+    int n;  //banyak angka (data)
+    int i;  //index looping
+    int x;  //nilai data baru
     //PROGRAM
-    inisialisasi(list1);
-    a = createNode(9);
-    b = createNode(3);
-    c = createNode(7);
-
-    list1 = a;
-    list1->next = b;
-    list1->next->next = c;
-
-    cout<<list1->info<<endl;
-    cout<<list1->next->info<<endl;
-    cout<<list1->next->next->info<<endl;
-
+    inisialisasi(list); //inisialisasi linked list  
+    cout<<"Berapa banyak angka ? ";cin>>n;
+    for(i=0; i<n; i++) {
+        cout<<"Masukkan angka : ";cin>>x;
+        createNode(x);
+        display();
+    }
     return 0;
 }
-
