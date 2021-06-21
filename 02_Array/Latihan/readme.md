@@ -1,1 +1,2 @@
 - Array1D <br><img src="https://github.com/ichsnn/struktur_data/blob/main/02_Array/Latihan/img/latihan1.png" width="360px"/>
+- Array2D <br><img src="https://github.com/ichsnn/struktur_data/blob/main/02_Array/Latihan/img/latihan2.png" width="360px"/>
