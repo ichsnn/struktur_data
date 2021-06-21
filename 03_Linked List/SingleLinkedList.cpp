@@ -2,53 +2,63 @@
 
 using namespace std;
 
+//TIPE DATA STRUKTUR (SINGLE LINKED LIST)
 struct Node {
     int info;
-    struct Node* next;
+    Node *next;
 };
 
 //DEKLARASI GLOBAL
-Node* list;
+Node *list;
 
+//PURWARUPA PROSEDURE ATAU FUNGSI YANG AKAN DIGUNAKAN
+void inisialisasi();
+Node *createNode(int data);
+bool isEmpty();
 
-//PURWARUPA FUNGSI ATAU PROSEDURE YANG AKAN DIGUNAKAN
-void inisialisasi(Node* list1) {
-//inisialisasi linked list
-    list1 = NULL;
-}
+/* PROGRAM UTAMA */
+int main() {    
 
-void createNode(int data) {
-//membuat node baru    
-    //DEKLARASI
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->info = data;
-    newNode->next = list;
-    list = newNode;
-}
+    //Deklarasi
+    Node *a, *b, *c;    
 
-void display() {
-    Node* temp = list;
-    cout<<"List is : ";
-    while(temp!=NULL) {
-        cout<<temp->info<<" ";
-        temp = temp->next;
+    //Algroitma
+    inisialisasi(); //inisialisasi linked list
+
+    a = createNode(9);
+    b = createNode(3);
+    c = createNode(7);
+
+    list = a;
+    list->next = b;
+    list->next->next = c;
+
+    while(!isEmpty()) {
+        cout<<list->info<<endl;
+        list = list->next;                
     }
-    cout<<endl;
-}
-
-//PROGRAM UTAMA
-int main(int argc, char const *argv[]) {
-    //DEKLARASI LOKAL
-    int n;  //banyak angka (data)
-    int i;  //index looping
-    int x;  //nilai data baru
-    //PROGRAM
-    inisialisasi(list); //inisialisasi linked list  
-    cout<<"Berapa banyak angka ? ";cin>>n;
-    for(i=0; i<n; i++) {
-        cout<<"Masukkan angka : ";cin>>x;
-        createNode(x);
-        display();
-    }
+    
     return 0;
+}
+
+//PROSEDURE DAN FUNGSI
+void inisialisasi() {
+//inisialisasi linked list
+    list = NULL;
+}
+
+Node *createNode(int data) {
+//membuat node baru    
+    //Deklarasi
+    Node *newNode = new Node;
+    //Algoritma
+    newNode->info = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+bool isEmpty() {
+    if(list==NULL) {
+        return true;
+    } else return false;
 }
