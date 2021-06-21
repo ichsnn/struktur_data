@@ -9,17 +9,13 @@ typedef int tMatrik[MAKS][MAKS];
 //DEKLARASI PURWARUPA FUNGSI YANG AKAN DIGUNAKAN
 void tampilMatrik(tMatrik M, int b, int k);         
 void inisialisasiMatrik(tMatrik &M, int b, int k);
-
+void bacaMatrik(tMatrik &M, int b, int k);
 
 //PROGRAM UTAMA
 int main(int argc, char const *argv[]) {
 
     //DEKLARASI
-    int m1[MAKS][MAKS] = {
-        {1, 2, 3},
-        {4, 5, 6},
-        {7, 8, 9}
-    };
+    tMatrik m1;        
     int i;
     int j;
     int baris, kolom;    
@@ -28,12 +24,16 @@ int main(int argc, char const *argv[]) {
     baris = 3;
     kolom = 3; 
         
-    tampilMatrik(m1, baris, kolom);
-    cout<<endl;
-
-    //setelah diinisialisasi
+    //Matrik diinisialisasi    
     inisialisasiMatrik(m1, baris, kolom);
     tampilMatrik(m1, baris, kolom);            
+    cout<<endl;
+
+    //Baca Matrik    
+    bacaMatrik(m1, baris, kolom);
+    fflush(stdin);cout<<endl;              
+    tampilMatrik(m1, baris, kolom);            
+
     return 0;
 }
 
@@ -60,7 +60,7 @@ void tampilMatrik(tMatrik M, int b, int k) {
     }
     cout<<endl;
     cout<<"Tekan Enter Untuk Lanjut... ";   
-    getchar();         
+    getchar();        
 }
 
 void inisialisasiMatrik(tMatrik &M, int b, int k) {
@@ -79,5 +79,19 @@ void inisialisasiMatrik(tMatrik &M, int b, int k) {
             j++;
         }                
         i++;
+    }    
+}
+
+void bacaMatrik(tMatrik &M, int b, int k) {
+//baca matrik
+
+    //DEKLARASI MATRIK
+    int i, j;
+
+    //ALGORITMA
+    for(i=0; i<b; i++) {
+        for(j=0; j<k; j++) {
+            cout<<"Data Baris "<<i<<", Kolom "<<j<<" : ";cin>>M[i][j];
+        }
     }    
 }
