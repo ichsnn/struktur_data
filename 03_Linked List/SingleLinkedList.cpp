@@ -11,19 +11,19 @@ struct Node {
 void inisialisasi(Node* &list) {
     list = NULL;
 }
-Node createNode(int info) {
+Node* createNode(int info) {
     //DEKLARASI
     Node* newNode = (Node*)malloc(sizeof(Node*));
     newNode->info = info;
     newNode->next = NULL;
-    return *newNode;    
+    return newNode;    
 }
 
 //PROGRAM UTAMA
 int main(int argc, char const *argv[]) {
     //DEKLARASI    
-    struct Node* list1;    
-    Node a, b, c;
+    Node* list1;    
+    Node *a, *b, *c;
 
     //PROGRAM
     inisialisasi(list1);
@@ -31,9 +31,9 @@ int main(int argc, char const *argv[]) {
     b = createNode(3);
     c = createNode(7);
 
-    list1 = &a;
-    list1->next = &b;
-    list1->next->next = &c;
+    list1 = a;
+    list1->next = b;
+    list1->next->next = c;
 
     cout<<list1->info<<endl;
     cout<<list1->next->info<<endl;
