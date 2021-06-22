@@ -18,6 +18,9 @@ int size(Node *list1);
 Node *getFirst(Node *list1);
 Node *getLast(Node *list1);
 Node *get(Node *list1, int x);
+void addFirst(Node *&list1, int x);
+void addLast(Node *&list1, int x);
+void add(Node *&list1, int x, int i);
 
 /* PROGRAM UTAMA */
 int main() {    
@@ -38,11 +41,17 @@ int main() {
     list = a;
     list->next = b;
     list->next->next = c;
-
-    cout<<"Panjang List  : "<<size(list)<<endl;
+    
+    cout<<"Panjang List  : "<<size(list)<<endl;    
     cout<<"Data di Awal  : "<<getFirst(list)->info<<endl;   //data di indeks pertama
     cout<<"Data di i-2   : "<<get(list, 2)->info<<endl;     //data di indeks-2
     cout<<"Data di Akhir : "<<getLast(list)->info<<endl;    //data di indeks terakhir
+    display(list);
+
+    addFirst(list, 8);
+    addLast(list, 2);
+    add(list, 5, 5);
+    cout<<"Panjang List  : "<<size(list)<<endl;    
     display(list);
 
     return 0;
@@ -139,4 +148,45 @@ Node *get(Node *list1, int x) {
             counter++;;
         } return temp;
     }
+}
+
+void addFirst(Node *&list1, int x) {
+//Tambah data di awal
+    //DEKLARASI
+    Node *newNode;
+    //ALGORITMA
+    newNode = createNode(x);
+    newNode->next = list1;
+    list1 = newNode;
+}
+
+void addLast(Node *&list1, int x) {
+//Tambah data di akhir    
+    //DEKLARASI
+    Node *newNode;
+    Node *last;
+    //ALGORITMA
+    if(isEmpty(list1)) {
+        addFirst(list1, x);
+    } else {
+        newNode = createNode(x);
+        last = getLast(list1);
+        last->next = newNode;        
+    }
+}
+
+void add(Node *&list1, int x, int i) {
+//Tambah data di tengah
+    //DEKLARASI
+    Node *newNode;
+    Node *prevNode;
+    //ALGORITMA
+    if(i==1) {
+        addFirst(list1, x);
+    } else if(i>1 && i<=size(list1)) {
+        prevNode = get(list1, i-1);
+        newNode = createNode(x);
+        newNode->next = prevNode->next;
+        prevNode->next = newNode;
+    } else cout<<"Posisi sisip tidak sah!";
 }
