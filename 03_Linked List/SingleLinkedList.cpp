@@ -21,6 +21,7 @@ Node *get(Node *list1, int x);
 void addFirst(Node *&list1, int x);
 void addLast(Node *&list1, int x);
 void add(Node *&list1, int x, int i);
+void update(Node *&list1, int i, int x);
 
 /* PROGRAM UTAMA */
 int main() {    
@@ -32,25 +33,30 @@ int main() {
     //Algroitma
     inisialisasi(list); //inisialisasi linked list
     cout<<"Panjang List : "<<size(list)<<endl;
-    display(list);
+    display(list);  //tampilkan list
 
-    a = createNode(9);
+    a = createNode(9);     //buat node baru
     b = createNode(3);
     c = createNode(7);
 
     list = a;
     list->next = b;
     list->next->next = c;
-    
-    cout<<"Panjang List  : "<<size(list)<<endl;    
+        
+    cout<<"Panjang List  : "<<size(list)<<endl;    //panjang list
     cout<<"Data di Awal  : "<<getFirst(list)->info<<endl;   //data di indeks pertama
     cout<<"Data di i-2   : "<<get(list, 2)->info<<endl;     //data di indeks-2
     cout<<"Data di Akhir : "<<getLast(list)->info<<endl;    //data di indeks terakhir
     display(list);
 
+    //menambahkan data diawal, ditengah dan diakhir
     addFirst(list, 8);
     addLast(list, 2);
     add(list, 5, 5);
+    cout<<"Panjang List  : "<<size(list)<<endl;    
+    display(list);
+
+    update(list, 1, 5);
     cout<<"Panjang List  : "<<size(list)<<endl;    
     display(list);
 
@@ -189,4 +195,15 @@ void add(Node *&list1, int x, int i) {
         newNode->next = prevNode->next;
         prevNode->next = newNode;
     } else cout<<"Posisi sisip tidak sah!";
+}
+
+void update(Node *&list1, int i, int x) {
+//Update data
+    //DEKLARASI
+    Node *nodeUpdate;
+    //ALGORITMA
+    nodeUpdate = get(list1, i);
+    if(nodeUpdate!=NULL) {
+        nodeUpdate->info = x;         
+    } else cout<<"Posisi update tidak sah!";
 }
