@@ -22,6 +22,9 @@ void addFirst(Node *&list1, int x);
 void addLast(Node *&list1, int x);
 void add(Node *&list1, int x, int i);
 void update(Node *&list1, int i, int x);
+void removeFirst(Node *&list1);
+void remove(Node *&list1, int i);
+void removeLast(Node *&list1);
 
 /* PROGRAM UTAMA */
 int main() {    
@@ -60,6 +63,16 @@ int main() {
     cout<<"Panjang List  : "<<size(list)<<endl;    
     display(list);
 
+    removeFirst(list);  //hapus di awal
+    display(list);
+
+    remove(list, 2);    //hapus di index tertentu
+    display(list);
+
+    removeLast(list);    //hapus di index tertentu
+    display(list);
+
+    system("cls");
     return 0;
 }
 
@@ -206,4 +219,58 @@ void update(Node *&list1, int i, int x) {
     if(nodeUpdate!=NULL) {
         nodeUpdate->info = x;         
     } else cout<<"Posisi update tidak sah!";
+}
+
+void removeFirst(Node *&list1) {
+//hapus data di awal
+    //DEKLARASI
+    Node *first;
+    //ALGORITMA
+    if(!isEmpty(list1)) {
+        first = getFirst(list1);
+        list1 = list1->next;
+        delete first;
+    } else cout<<"Penghapusan Gagal Karena Data Kosong"<<endl;
+}
+
+void remove(Node *&list1, int i) {
+//hapus data di index ke - ...
+    //DEKLARASI
+    Node *prevNode;
+    Node *removeNode;
+    //ALGORITMA
+    if(!isEmpty(list1)) {
+        if(i==1) {
+            removeFirst(list1);
+        } else {
+            prevNode = get(list1, i-1);
+            if(prevNode != NULL) {
+                removeNode = prevNode->next;
+                prevNode->next = removeNode->next;
+                delete removeNode;
+            } else {
+                cout<<"Penghapusan Gagal Karena Index Tidak Ditemukan"<<endl;
+            }
+        }
+    } else cout<<"Penghapusan Gagal Karena Index Hapus Tidak Ditemukan"<<endl;
+}
+
+void removeLast(Node *&list1) {
+//hapus data di index akhir
+    //DEKLARASI
+    Node *last;
+    Node *prevNode;    
+    //ALGORITMA    
+    if(!isEmpty(list1)) {
+        if(size(list1) == 1){   
+            removeFirst(list1);
+        } else {
+            prevNode = get(list1, size(list1)-1);            
+            if(prevNode != NULL) {
+                last = prevNode->next;
+                prevNode->next = last->next;
+                delete last;
+            } else cout<<"Penghapusan Gagal Karena Index Tidak Ditemukan"<<endl;            
+        }
+    } else cout<<"Penghapusan Gagal Karena Index Hapus Tidak Ditemukan"<<endl;
 }
