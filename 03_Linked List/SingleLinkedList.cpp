@@ -8,22 +8,23 @@ struct Node {
     Node *next;
 };
 
-//DEKLARASI GLOBAL
-Node *list;
 
 //PURWARUPA PROSEDURE ATAU FUNGSI YANG AKAN DIGUNAKAN
-void inisialisasi();
+void inisialisasi(Node *&list1);
 Node *createNode(int data);
-bool isEmpty();
+bool isEmpty(Node *list1);
+void display(Node *list1);
 
 /* PROGRAM UTAMA */
 int main() {    
-
+    system("cls");
     //Deklarasi
+    Node *list;
     Node *a, *b, *c;    
 
     //Algroitma
-    inisialisasi(); //inisialisasi linked list
+    inisialisasi(list); //inisialisasi linked list
+    display(list);
 
     a = createNode(9);
     b = createNode(3);
@@ -33,18 +34,15 @@ int main() {
     list->next = b;
     list->next->next = c;
 
-    while(!isEmpty()) {
-        cout<<list->info<<endl;
-        list = list->next;                
-    }
-    
+    display(list);
+
     return 0;
 }
 
 //PROSEDURE DAN FUNGSI
-void inisialisasi() {
+void inisialisasi(Node *&list1) {
 //inisialisasi linked list
-    list = NULL;
+    list1 = NULL;
 }
 
 Node *createNode(int data) {
@@ -57,8 +55,23 @@ Node *createNode(int data) {
     return newNode;
 }
 
-bool isEmpty() {
-    if(list==NULL) {
+bool isEmpty(Node* list1) {
+    if(list1==NULL) {
         return true;
     } else return false;
+}
+
+void display(Node* list1) {
+    //DEKLARASI
+    Node *temp;    
+    cout<<"List : " ;
+    if(!isEmpty(list1)) {
+        temp = list1;
+        while(temp!=NULL) {
+            cout<<temp->info<<" ";
+            temp = temp->next;            
+        }
+    } else cout<<"[List Kosong]";
+    cout<<endl;
+    cout<<"Tekan Enter Untuk Melanjutkan...";getchar();cout<<endl;
 }
