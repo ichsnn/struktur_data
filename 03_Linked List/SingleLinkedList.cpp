@@ -25,6 +25,7 @@ void update(Node *&list1, int i, int x);
 void removeFirst(Node *&list1);
 void remove(Node *&list1, int i);
 void removeLast(Node *&list1);
+void removeAll(Node *&listn1);
 
 /* PROGRAM UTAMA */
 int main() {    
@@ -70,6 +71,9 @@ int main() {
     display(list);
 
     removeLast(list);    //hapus di index tertentu
+    display(list);
+
+    removeAll(list);    //hapus semua
     display(list);
 
     system("cls");
@@ -273,4 +277,15 @@ void removeLast(Node *&list1) {
             } else cout<<"Penghapusan Gagal Karena Index Tidak Ditemukan"<<endl;            
         }
     } else cout<<"Penghapusan Gagal Karena Index Hapus Tidak Ditemukan"<<endl;
+}
+
+void removeAll(Node *&list1) {
+//hapus semua data
+    //DEKLARASI
+    //tidak ada
+    //ALGORITMA
+    while (!isEmpty(list1)) {
+        removeFirst(list1);        
+    }
+    
 }
