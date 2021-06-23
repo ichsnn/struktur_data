@@ -21,6 +21,9 @@ void insert(Node* &head, Node* &tail, int data, int posisi);
 bool isEmpty(Node* list);
 void displayHead(Node* head);
 void displayTail(Node* tail);
+void removeAtHead(Node* &head, Node* &tail);
+void removeAtTail(Node* &head, Node* &tail);
+void removeAt(Node* &head, Node* &tail, int posisi);
 
 //--------------------------------------------------------------------------
 
@@ -33,8 +36,8 @@ int main(int argc, char const *argv[]) {
     displayHead(head1);
     displayTail(tail1);
     cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;
-    cout<<endl;
-    insertAtHead(head1, tail1, 5);
+    cout<<endl;                 
+    insertAtHead(head1, tail1, 5);    
     insertAtHead(head1, tail1, 7);
     insertAtHead(head1, tail1, 10);
     displayHead(head1);    
@@ -53,6 +56,22 @@ int main(int argc, char const *argv[]) {
     displayTail(tail1);    
     cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;    
     cout<<endl;            
+    removeAtHead(head1, tail1);
+    removeAtTail(head1, tail1);
+    displayHead(head1);    
+    displayTail(tail1);    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;    
+    cout<<endl;       
+    removeAt(head1, tail1, 5);    
+    displayHead(head1);    
+    displayTail(tail1);    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;        
+    cout<<endl;       
+    removeAt(head1, tail1, 4);
+    displayHead(head1);    
+    displayTail(tail1);    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;        
+    cout<<endl;       
     return 0;
 }
 
@@ -198,4 +217,57 @@ void displayTail(Node* tail) {
         }
     }
     cout<<endl;
+}
+void removeAtHead(Node* &head, Node* &tail) {
+//Hapus node dari head (awal)
+    //Deklarasi
+    Node* removedNode;
+    //Agoritma
+    if(sizeAtHead(head) == 1) {
+        head = NULL;
+        tail = NULL;        
+    } else if(sizeAtHead(head) > 1) {
+        removedNode = head;
+        head = head->next;
+        head->prev = NULL;
+        delete removedNode;
+    } else cout<<"Penghapusan Gagal Karena Data Kosong"<<endl;
+}
+void removeAtTail(Node* &head, Node* &tail) {
+//Hapus node dari tail (terakhir)    
+    //Deklarasi
+    Node* removedNode;
+    //Algoritma
+    if(sizeAtHead(head) == 1) {
+        head = NULL;
+        tail = NULL;
+    } else if(sizeAtHead(head) > 1) {
+        removedNode = tail;
+        tail = tail->prev;
+        tail->next = NULL;
+        delete removedNode;
+    } else cout<<"Penghapusan Gagal Karena Data Kosong"<<endl;
+}
+void removeAt(Node* &head, Node* &tail, int posisi) {
+//Hapus node dari posisi tertentu (ambil dari head)    
+    //Deklarasi
+    Node* removedNode;    
+    int size = sizeAtHead(head);
+    //Algoritma     
+    if(size == 1) {
+        head = NULL;
+        tail = NULL;
+    } else if(size > 1) {
+        if(posisi == 1) {
+            removeAtHead(head, tail);        
+        }            
+        else if(posisi == sizeAtHead(head)) {
+            removeAtTail(head, tail);
+        } else if(posisi>1 && posisi<size) {
+            removedNode = getAtHead(head, posisi);
+            removedNode->prev->next = removedNode->next;
+            removedNode->next->prev = removedNode->prev;
+            delete removedNode;
+        } else cout<<"Penghapusan Gagal Karena Data Tidak Ditemukan"<<endl;
+    } else cout<<"Penghapusan Gagal Karena Data Kosong"<<endl;
 }
