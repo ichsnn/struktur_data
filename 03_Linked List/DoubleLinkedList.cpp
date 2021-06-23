@@ -24,7 +24,7 @@ void displayTail(Node* tail);
 void removeAtHead(Node* &head, Node* &tail);
 void removeAtTail(Node* &head, Node* &tail);
 void removeAt(Node* &head, Node* &tail, int posisi);
-
+void removeAll(Node* &head, Node* &tail);
 //--------------------------------------------------------------------------
 
 //PROGRAM UTAMA
@@ -68,6 +68,11 @@ int main(int argc, char const *argv[]) {
     cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;        
     cout<<endl;       
     removeAt(head1, tail1, 4);
+    displayHead(head1);    
+    displayTail(tail1);    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;        
+    cout<<endl;       
+    removeAll(head1, tail1);
     displayHead(head1);    
     displayTail(tail1);    
     cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;        
@@ -270,4 +275,9 @@ void removeAt(Node* &head, Node* &tail, int posisi) {
             delete removedNode;
         } else cout<<"Penghapusan Gagal Karena Data Tidak Ditemukan"<<endl;
     } else cout<<"Penghapusan Gagal Karena Data Kosong"<<endl;
+}
+void removeAll(Node* &head, Node* &tail) {    
+    while(!isEmpty(head)) {
+        removeAtHead(head, tail);
+    }
 }
