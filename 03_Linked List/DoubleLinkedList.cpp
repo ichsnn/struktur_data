@@ -13,7 +13,11 @@ struct Node {
 void inisialisasi(Node* &head, Node* &tail);
 Node* createNode(int data);
 void insertAtHead(Node* &head, Node* &tail, int data);
-void insertAtTail(Node* &tail, Node* &head, int data);
+void insertAtTail(Node* &head, Node* &tail, int data);
+int sizeAtHead(Node* head);
+Node* getFirst(Node* head);
+Node* getAtHead(Node* head, int posisi);
+void insert(Node* &head, Node* &tail, int data, int posisi);
 bool isEmpty(Node* list);
 void displayHead(Node* head);
 void displayTail(Node* tail);
@@ -22,16 +26,33 @@ void displayTail(Node* tail);
 
 //PROGRAM UTAMA
 int main(int argc, char const *argv[]) {
+    system("cls");
     //Deklarasi
     Node* head1; Node* tail1;    
     inisialisasi(head1, tail1);
     displayHead(head1);
+    displayTail(tail1);
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;
+    cout<<endl;
     insertAtHead(head1, tail1, 5);
     insertAtHead(head1, tail1, 7);
     insertAtHead(head1, tail1, 10);
     displayHead(head1);    
     displayTail(tail1);    
-    cout<<endl;    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;
+    cout<<endl;
+    insertAtTail(head1, tail1, 20);
+    insertAtTail(head1, tail1, 9);
+    insertAtTail(head1, tail1, 5);
+    displayHead(head1);    
+    displayTail(tail1);    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;
+    cout<<endl;       
+    insert(head1, tail1, 19, 2);
+    displayHead(head1);    
+    displayTail(tail1);    
+    cout<<"Panjang List: "<<sizeAtHead(head1)<<endl;    
+    cout<<endl;            
     return 0;
 }
 
@@ -40,12 +61,12 @@ int main(int argc, char const *argv[]) {
 //Prosedure atau Fungsi
 
 void inisialisasi(Node* &head, Node* &tail) {   
-//Inisialisasi Double Linked List (1)
+//Inisialisasi Double Linked List 
     head = NULL;
     tail = NULL;
 }
 Node* createNode(int data) {
-//Membuat Node Baru (2)
+//Membuat Node Baru 
     //Deklarasi
     Node* newNode;
     //Algoritma
@@ -56,7 +77,7 @@ Node* createNode(int data) {
     return newNode;    
 }
 void insertAtHead(Node* &head, Node* &tail, int data) {
-//Tambah data di awal (3)
+//Tambah data di awal 
     //Deklarasi
     Node* newNode;
     //Algoritma
@@ -70,8 +91,8 @@ void insertAtHead(Node* &head, Node* &tail, int data) {
         head = newNode;
     }
 }
-void insertAtTail(Node* &tail, Node* &head, int data) {
-//Tambah data di akhir (4)
+void insertAtTail(Node* &head, Node* &tail, int data) {
+//Tambah data di akhir 
     //Deklarasi
     Node* newNode;
     //Algoritma
@@ -85,14 +106,69 @@ void insertAtTail(Node* &tail, Node* &head, int data) {
         tail = newNode;    
     }
 }
+int sizeAtHead(Node* head) {
+//Panjang list 
+    //Deklarasi
+    Node* temp;
+    int counter;
+    //Algoritma    
+    if(!isEmpty(head)) {
+        counter = 1;
+        while(head->next!=NULL) {
+            counter++;
+            head = head->next;
+        }
+        return counter;
+    } return 0;
+}
+Node* getFirst(Node* head) {
+    return head;
+}
+Node* getAtHead(Node* head, int posisi) {
+//Ambil data dari head 
+    //Deklarasi
+    Node* temp;
+    int counter;
+    //Algoritma
+    if(isEmpty(head) || posisi < 1 || posisi>sizeAtHead(head)) {
+        return NULL;
+    } else {
+        temp = getFirst(head);
+        counter = 1;
+        while(counter<posisi) {
+            temp = temp->next;
+            counter++;            
+        }                 
+        return temp;
+    }
+}
+void insert(Node* &head, Node* &tail, int data, int posisi) {
+//Tambah Data di Posisi Tertentu     
+    //Deklarasi
+    Node* newNode;    
+    Node* nodeSisip;    
+    int counter;
+    //Algoritma
+    newNode = createNode(data);    
+    if(isEmpty(head)) {
+        head = newNode;
+        tail = newNode;
+    } else if (posisi>1 && posisi<=sizeAtHead(head)) {
+        nodeSisip = getAtHead(head, posisi);
+        newNode->prev = nodeSisip->prev;
+        newNode->next = nodeSisip;
+        nodeSisip->prev->next = newNode; 
+        nodeSisip->prev = newNode;
+    } else cout<<"posisi tidak sah!";
+}
 bool isEmpty(Node* list) {
-//Cek isi linked list (5)
+//Cek isi linked list
     //Deklarasi
     if(list == NULL) return true;
     else return false;
 }
 void displayHead(Node* head) {
-//Tampilkan data dari head (6)    
+//Tampilkan data dari head     
     //Deklarasi
     Node* temp;
     //Algoritma
@@ -108,7 +184,7 @@ void displayHead(Node* head) {
     cout<<endl;
 }
 void displayTail(Node* tail) {
-//Tampilkan data dari tail (7)
+//Tampilkan data dari tail 
     //Deklarasi
     Node* temp;
     //Algoritma

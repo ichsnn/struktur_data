@@ -168,7 +168,7 @@ Node *get(Node *list1, int x) {
         counter = 1;
         while(counter<x) {
             temp = temp->next;         
-            counter++;;
+            counter++;
         } return temp;
     }
 }
