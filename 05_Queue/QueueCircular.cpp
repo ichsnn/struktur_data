@@ -1,11 +1,12 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 #define max 5
 
 struct TQueue
 {
-    int element[max+1]; // array 1..5
+    int element[max + 1]; // array 1..5
     int front, rear;
 };
 
@@ -17,31 +18,39 @@ bool isFull(TQueue queue);
 void display(TQueue queue);
 int peek(TQueue queue);
 void enqueue(TQueue &queue, int newElement);
+void dequeue(TQueue &queue, int dequeueElement);
 
 //PROGRAM UTAMA
 int main(int argc, char const *argv[])
 {
     //Deklarasi
     TQueue queue1;
+    int take;
     //ALGORTIMA
     init(queue1);
     display(queue1);
     cout << endl;
     enqueue(queue1, 1);
     display(queue1);
-    cout<<endl;
+    cout << endl;
     enqueue(queue1, 2);
     display(queue1);
-    cout<<endl;
+    cout << endl;
     enqueue(queue1, 3);
     display(queue1);
-    cout<<endl;
+    cout << endl;
     enqueue(queue1, 4);
     display(queue1);
-    cout<<endl;
+    cout << endl;
     enqueue(queue1, 5);
     display(queue1);
-    cout<<endl;    
+    cout << endl;
+    dequeue(queue1, take);
+    display(queue1);
+    cout << endl;
+    enqueue(queue1, 6);
+    display(queue1);
+    cout << endl;        
 }
 
 //PROSEDURE ATAU FUNGSI
@@ -60,13 +69,9 @@ bool isFull(TQueue queue)
 {
     //cek queue penuh
     if (queue.front <= queue.rear)
-    {
         return (queue.rear - queue.front) == max - 1;
-    }
     else
-    {
         return (queue.front - queue.rear) == 1;
-    }
 }
 int count(TQueue queue)
 {
@@ -82,10 +87,9 @@ int count(TQueue queue)
         while (i != queue.rear)
         {
             counter++;
-            if (i >= max)
+            if (i == max)
             {
-                i = 0;
-                i++;
+                i = 1;
             }
             else
                 i++;
@@ -102,9 +106,7 @@ void display(TQueue queue)
     //Algoritma
     cout << "Isi Queue : ";
     if (isEmpty(queue))
-    {
         cout << "[Data Kosong]";
-    }
     else
     {
         cout << "[Front] ";
@@ -113,13 +115,11 @@ void display(TQueue queue)
         {
             cout << queue.element[i] << " ";
             if (i == max)
-            {
                 i = 1;
-            }
             else
                 i++;
-        }        
-        cout<<queue.element[i];
+        }
+        cout << queue.element[i];
         cout << " [Rear]";
     }
     cout << endl;
@@ -147,12 +147,20 @@ void enqueue(TQueue &queue, int newElement)
         else
         {
             if (queue.rear == max)
-            {
                 queue.rear = 1;
-            }
             else
                 queue.rear++;
-        }        
-        queue.element[queue.rear] = newElement;                        
+        }
+        queue.element[queue.rear] = newElement;
     }
+}
+void dequeue(TQueue &queue, int dequeueElement)
+{
+    //menghapus atua mengambil elemen queue
+    //Deklarasi
+    dequeueElement = queue.element[queue.front];
+    if (queue.front == max)
+        queue.front = 1;
+    else
+        queue.front++;
 }
