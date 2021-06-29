@@ -24,6 +24,7 @@ void dequeue(TQueue &queue, int dequeueElement);
 int main(int argc, char const *argv[])
 {
     //Deklarasi
+    system("cls");
     TQueue queue1;
     int take;
     //ALGORTIMA
@@ -50,7 +51,18 @@ int main(int argc, char const *argv[])
     cout << endl;
     enqueue(queue1, 6);
     display(queue1);
-    cout << endl;        
+    cout << endl;
+    while (!isEmpty(queue1))
+    {
+        dequeue(queue1, take);
+        display(queue1);
+        cout << endl;
+    }
+    enqueue(queue1, 1);
+    display(queue1);
+    cout<<endl;
+    dequeue(queue1, take);
+    display(queue1);
 }
 
 //PROSEDURE ATAU FUNGSI
@@ -59,6 +71,10 @@ void init(TQueue &queue)
     //inisialisasi
     queue.front = 0;
     queue.rear = 0;
+    for (int i = 1; i <= max; i++)
+    {
+        queue.element[i] = 0;
+    }
 }
 bool isEmpty(TQueue queue)
 {
@@ -109,18 +125,13 @@ void display(TQueue queue)
         cout << "[Data Kosong]";
     else
     {
-        cout << "[Front] ";
-        i = queue.front;
-        while (i != queue.rear)
+        i = 1;
+        while (i != max)
         {
             cout << queue.element[i] << " ";
-            if (i == max)
-                i = 1;
-            else
-                i++;
+            i++;
         }
         cout << queue.element[i];
-        cout << " [Rear]";
     }
     cout << endl;
     system("pause");
@@ -157,10 +168,25 @@ void enqueue(TQueue &queue, int newElement)
 void dequeue(TQueue &queue, int dequeueElement)
 {
     //menghapus atua mengambil elemen queue
-    //Deklarasi
-    dequeueElement = queue.element[queue.front];
-    if (queue.front == max)
-        queue.front = 1;
+    if (isEmpty(queue))
+    {
+        cout << "[Queue Kosong]" << endl;
+    }
     else
-        queue.front++;
+    {
+        dequeueElement = queue.element[queue.front];
+        queue.element[queue.front] = 0;
+        if (queue.front == queue.rear)
+        {
+            queue.front = 0;
+            queue.rear = 0;
+        }
+        else
+        {
+            if (queue.front == max)
+                queue.front = 1;
+            else
+                queue.front++;
+        }
+    }
 }
