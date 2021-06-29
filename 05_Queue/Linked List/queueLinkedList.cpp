@@ -80,8 +80,7 @@ int count(TQueue queue)
 }
 void display(TQueue queue)
 {
-    //Deklarasi
-    int i;
+    //Deklarasi    
     Node *head;
     //Algoritma
     head = queue.front;
