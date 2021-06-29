@@ -43,7 +43,7 @@ int main()
     display(queue1);
     dequeue(queue1, keluar);    
     display(queue1);
-    dequeue(queue1, keluar);    
+    dequeue(queue1, keluar);            
     display(queue1);
 }
 
