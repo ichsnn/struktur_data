@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <Windows.h>
 using namespace std;
 
 struct Node
@@ -13,13 +14,14 @@ struct TQueue
     Node *rear;
 };
 
-void init(TQueue &queue);   //inisialisasi antrian
-bool isEmpty(TQueue queue); //cek antrian kosong
-void displayQueue(TQueue queue); //tampilkan isi nomor antrian
-void enqueue(TQueue &queue, int newElement); //tambah antrian
-void dequeue(TQueue &queue, int &dequeueElement);   //menghapus antrian
-void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu); //event ketika memilih menu
-void displayMenu(TQueue queue, int enqueueElement, int dequeueElement, int menu, string &loket1, string &loket2);   //menampilkan output event memilih menu
+void init(TQueue &queue);                                                                                       //inisialisasi antrian
+bool isEmpty(TQueue queue);                                                                                     //cek antrian kosong
+void displayQueue(TQueue queue);                                                                                //tampilkan isi nomor antrian
+void enqueue(TQueue &queue, int newElement);                                                                    //tambah antrian
+void dequeue(TQueue &queue, int &dequeueElement);                                                               //menghapus antrian
+void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu, string &loket1, string &loket2); //event ketika memilih menu
+void displayMenu(TQueue queue, int enqueueElement, int dequeueElement, int menu, string loket1, string loket2); //menampilkan output event memilih menu
+void sound(int dequeueElement);
 
 int main(int argc, char const *argv[])
 {
@@ -35,7 +37,7 @@ int main(int argc, char const *argv[])
     init(queue1);
     do
     {
-        cout<<"-----------SISTEM ANTRIAN S.A.T. BANK-----------\n";
+        cout << "-----------SISTEM ANTRIAN S.A.T. BANK-----------\n";
         cout << endl;
         displayMenu(queue1, nomorAntrian, nomorPanggilan, opsi, loket1, loket2);
         cout << endl;
@@ -46,19 +48,19 @@ int main(int argc, char const *argv[])
         cout << endl;
         cout << "Masukkan pilihan (1-4) : ";
         cin >> opsi;
-        choice(queue1, nomorAntrian, nomorPanggilan, opsi);
+        choice(queue1, nomorAntrian, nomorPanggilan, opsi, loket1, loket2);
         cout << endl;
         system("cls");
     } while (opsi != 4);
     return 0;
 }
 
-void init(TQueue &queue)    //inisialisasi
+void init(TQueue &queue) //inisialisasi
 {
     queue.front = NULL;
     queue.rear = NULL;
 }
-bool isEmpty(TQueue queue)  //cek antrian kosong
+bool isEmpty(TQueue queue) //cek antrian kosong
 {
     return queue.front == NULL;
 }
@@ -130,7 +132,7 @@ void peek(TQueue queue) //melihat nomor paling depan yang akan di hapus berikutn
     else
         cout << queue.front->info;
 }
-void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu) //event memilih menu
+void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu, string &loket1, string &loket2) //event memilih menu
 {
     switch (menu)
     {
@@ -138,6 +140,21 @@ void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu) /
         enqueue(queue, ++enqueueElement);
         break;
     case 2:
+        if (isEmpty(queue))
+        {
+            cout << "ERROR : Antrian Kosong!";
+            fflush(stdin);
+            getchar();
+        }
+        else
+        {
+            dequeue(queue, dequeueElement);
+            loket1 = to_string(dequeueElement);
+            PlaySound(TEXT("sound/nomor-antrian.wav"), NULL, SND_SYNC);
+            sound(dequeueElement);
+            PlaySound(TEXT("sound/ke-loket-1.wav"), NULL, SND_ASYNC);
+        }
+        break;
     case 3:
         if (isEmpty(queue))
         {
@@ -146,10 +163,16 @@ void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu) /
             getchar();
         }
         else
+        {
             dequeue(queue, dequeueElement);
+            loket2 = to_string(dequeueElement);
+            PlaySound(TEXT("sound/nomor-antrian.wav"), NULL, SND_SYNC);
+            sound(dequeueElement);
+            PlaySound(TEXT("sound/ke-loket-2.wav"), NULL, SND_ASYNC);
+        }
         break;
-    case 4: 
-        cout<<"Terimakasih Sudah Menggunakan Aplikasi Ini";
+    case 4:
+        cout << "Terimakasih Sudah Menggunakan Aplikasi Ini";
         fflush(stdin);
         getchar();
         break;
@@ -157,25 +180,39 @@ void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu) /
         break;
     }
 }
-void displayMenu(TQueue queue, int enqueueElement, int dequeueElement, int menu, string &loket1, string &loket2)
+void displayMenu(TQueue queue, int enqueueElement, int dequeueElement, int menu, string loket1, string loket2)
 {
     cout << "Loket 1\t\tLoket 2\t\tNomor Berikutnya";
     cout << endl;
-    switch (menu)
-    {
-    case 2:
-        if (!isEmpty(queue))
-            loket1 = to_string(dequeueElement);
-        break;
-    case 3:
-        if (!isEmpty(queue))
-            loket2 = to_string(dequeueElement);
-        break;
-
-    default:
-        break;
-    }
     cout << "  " << loket1 << "\t\t  " << loket2 << "\t\t     ";
     peek(queue);
     cout << endl;
+}
+void sound(int dequeueElement)
+{
+    if (to_string(dequeueElement).length() > 1 && dequeueElement != 10)
+    {
+        PlaySound(TEXT("sound/puluh.wav"), NULL, SND_SYNC);
+    }
+    else
+    {
+        if (dequeueElement == 1)
+            PlaySound(TEXT("sound/1.wav"), NULL, SND_SYNC);
+        if (dequeueElement == 2)
+            PlaySound(TEXT("sound/2.wav"), NULL, SND_SYNC);
+        if (dequeueElement == 3)
+            PlaySound(TEXT("sound/3.wav"), NULL, SND_SYNC);
+        if (dequeueElement == 4)
+            PlaySound(TEXT("sound/4.wav"), NULL, SND_SYNC);
+        if (dequeueElement == 5)
+            PlaySound(TEXT("sound/5.wav"), NULL, SND_SYNC);
+        if (dequeueElement == 6)
+            PlaySound(TEXT("sound/6.wav"), NULL, SND_SYNC);
+        if (dequeueElement == 7)
+            PlaySound(TEXT("sound/7.wav"), NULL, SND_SYNC);        
+        if (dequeueElement == 8)
+            PlaySound(TEXT("sound/7.wav"), NULL, SND_SYNC);        
+        if (dequeueElement == 9)
+            PlaySound(TEXT("sound/9.wav"), NULL, SND_SYNC);        
+    }
 }
