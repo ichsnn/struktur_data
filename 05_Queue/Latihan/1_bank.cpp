@@ -22,6 +22,9 @@ void dequeue(TQueue &queue, int &dequeueElement);                               
 void choice(TQueue &queue, int &enqueueElement, int &dequeueElement, int menu, string &loket1, string &loket2); //event ketika memilih menu
 void displayMenu(TQueue queue, int enqueueElement, int dequeueElement, int menu, string loket1, string loket2); //menampilkan output event memilih menu
 void sound(int dequeueElement);
+void soundSatuan(int satuan);
+void soundBelasan();
+void soundPuluhan();
 
 int main(int argc, char const *argv[])
 {
@@ -190,29 +193,52 @@ void displayMenu(TQueue queue, int enqueueElement, int dequeueElement, int menu,
 }
 void sound(int dequeueElement)
 {
-    if (to_string(dequeueElement).length() > 1 && dequeueElement != 10)
+    int angka = dequeueElement;
+    if (angka > 0 && angka <= 11)
+        soundSatuan(angka);
+    if (angka > 11 && angka <= 19)
     {
-        PlaySound(TEXT("sound/puluh.wav"), NULL, SND_SYNC);
+        soundSatuan(angka % 10);
+        soundBelasan();
     }
-    else
+    if (angka >= 20 && angka <= 99)
     {
-        if (dequeueElement == 1)
-            PlaySound(TEXT("sound/1.wav"), NULL, SND_SYNC);
-        if (dequeueElement == 2)
-            PlaySound(TEXT("sound/2.wav"), NULL, SND_SYNC);
-        if (dequeueElement == 3)
-            PlaySound(TEXT("sound/3.wav"), NULL, SND_SYNC);
-        if (dequeueElement == 4)
-            PlaySound(TEXT("sound/4.wav"), NULL, SND_SYNC);
-        if (dequeueElement == 5)
-            PlaySound(TEXT("sound/5.wav"), NULL, SND_SYNC);
-        if (dequeueElement == 6)
-            PlaySound(TEXT("sound/6.wav"), NULL, SND_SYNC);
-        if (dequeueElement == 7)
-            PlaySound(TEXT("sound/7.wav"), NULL, SND_SYNC);        
-        if (dequeueElement == 8)
-            PlaySound(TEXT("sound/7.wav"), NULL, SND_SYNC);        
-        if (dequeueElement == 9)
-            PlaySound(TEXT("sound/9.wav"), NULL, SND_SYNC);        
+        soundSatuan(angka/10);
+        soundPuluhan();
+        soundSatuan(angka%10);
     }
+}
+
+void soundSatuan(int satuan)
+{
+    if (satuan == 1)
+        PlaySound(TEXT("sound/1.wav"), NULL, SND_SYNC);
+    if (satuan == 2)
+        PlaySound(TEXT("sound/2.wav"), NULL, SND_SYNC);
+    if (satuan == 3)
+        PlaySound(TEXT("sound/3.wav"), NULL, SND_SYNC);
+    if (satuan == 4)
+        PlaySound(TEXT("sound/4.wav"), NULL, SND_SYNC);
+    if (satuan == 5)
+        PlaySound(TEXT("sound/5.wav"), NULL, SND_SYNC);
+    if (satuan == 6)
+        PlaySound(TEXT("sound/6.wav"), NULL, SND_SYNC);
+    if (satuan == 7)
+        PlaySound(TEXT("sound/7.wav"), NULL, SND_SYNC);
+    if (satuan == 8)
+        PlaySound(TEXT("sound/8.wav"), NULL, SND_SYNC);
+    if (satuan == 9)
+        PlaySound(TEXT("sound/9.wav"), NULL, SND_SYNC);
+    if (satuan == 10)
+        PlaySound(TEXT("sound/10.wav"), NULL, SND_SYNC);
+    if (satuan == 11)
+        PlaySound(TEXT("sound/11.wav"), NULL, SND_SYNC);
+}
+void soundBelasan()
+{
+    PlaySound(TEXT("sound/belas.wav"), NULL, SND_SYNC);
+}
+void soundPuluhan()
+{
+    PlaySound(TEXT("sound/puluh.wav"), NULL, SND_SYNC);
 }
